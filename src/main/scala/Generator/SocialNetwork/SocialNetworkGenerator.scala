@@ -11,7 +11,7 @@ import org.apache.spark.SparkContext._
 import scala.reflect._
 
 import model._
-import spark.Spark.sc
+import spark.Spark.spark
 
 /** Can generate a social network
  *  A social network is a graph of User linked by a Relation
@@ -87,7 +87,7 @@ class RandomSocialNetworkGenerator extends SocialNetworkGenerator with IntGraphU
 	override def generate(users: RDD[User]): Graph[User, Relation]= {
 		// Need to map the vertices because logNormal give an int attribute
 		val t = ClassTag[Relation]_
-		val intGraph = GraphGenerators.logNormalGraph(sc, users.count.toInt).mapVertices{
+		val intGraph = GraphGenerators.logNormalGraph(spark.sparkContext, users.count.toInt).mapVertices{
 			case (id, v) => v.toLong
 		}
 

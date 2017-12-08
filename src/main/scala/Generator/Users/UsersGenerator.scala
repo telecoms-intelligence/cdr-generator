@@ -6,7 +6,7 @@ import org.apache.spark.SparkConf
 import java.util.Random
 
 import model._
-import spark.Spark.sc
+import spark.Spark.spark
 
 abstract class UsersGenerator() extends Serializable{
 	def generate(
@@ -23,7 +23,7 @@ class BasicUsersGenerator(nUsers: Int) extends UsersGenerator {
 		operators: Array[Operator] 
 		) : org.apache.spark.rdd.RDD[User] = {
 
-			sc.parallelize( 1 to nUsers map{ id => 
+			spark.sparkContext.parallelize( 1 to nUsers map{ id => 
 				new DumUser( id, operators(0), sampleCells(cells)(0) )
 			})
 

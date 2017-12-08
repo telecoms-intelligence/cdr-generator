@@ -3,7 +3,6 @@ import org.apache.spark.SparkContext._
 import org.apache.spark.SparkConf
 import com.github.nscala_time.time.Imports._
 
-import spark.Spark.sc
 import generator.users._
 import generator.operators._
 import generator.cells._
